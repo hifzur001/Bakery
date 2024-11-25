@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bakedo - Delicious Bakery Shop</title>
+        <meta
+            name="description"
+            content="Bakedo - Explore our delicious bakery items, shop now, and stay updated with featured blogs and pages."
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+            integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+            crossorigin="anonymous"
+        />
+        <!-- Owl Carousel CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        />
+        <!-- AOS CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="https://bakedo-store-demo.myshopify.com/cdn/shop/t/2/assets/favicon.png?v=41258079190042772971677350421"
+            type="image/x-icon"
+        />
+        <style>
+            body {
+                font-family: Axiforma, sans-serif;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <!-- Popup Modal -->
+        <div
+            id="discountModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+        >
+            <div
+                class="bg-white w-11/12 max-w-lg rounded-lg p-8 text-center shadow-lg relative"
+            >
+                <!-- Close Button -->
+                <button
+                    id="closeModal"
+                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl font-semibold"
+                    data-aos="zoom-in"
+                >
+                    &times;
+                </button>
+                <h2
+                    class="text-sm font-bold uppercase tracking-wide mb-2"
+                    data-aos="fade-down"
+                >
+                    Signup for Emails
+                </h2>
+                <h3
+                    class="text-2xl font-bold mb-4"
+                    data-aos="fade-down"
+                    data-aos-delay="200"
+                >
+                    Get 20% Discount Shipped to Your Inbox
+                </h3>
+                <p
+                    class="text-gray-600 mb-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    Subscribe to our newsletter and we will ship a 20% discount
+                    code today.
+                </p>
+
+                <!-- Email Input and Button in Same Line -->
+                <form id="emailForm" class="flex items-center">
+                    <input
+                        type="email"
+                        id="emailInput"
+                        class="w-full max-w-xs px-4 py-2 border border-gray-300 rounded-l-md"
+                        placeholder="Enter Your Email ..."
+                        required
+                        data-aos="fade-up"
+                    />
+                    <button
+                        type="submit"
+                        class="bg-black text-white px-6 py-2 rounded-r-md w-auto"
+                        data-aos="fade-up"
+                        data-aos-delay="400"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+
+                <button
+                    id="noThanks"
+                    class="mt-4 text-sm text-gray-500 underline hover:text-gray-800"
+                    data-aos="fade-down"
+                    data-aos-delay="500"
+                >
+                    No, Thanks.
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav
+            class="flex items-center justify-between px-8 py-4 border-b border-gray-200"
+            data-aos="fade-down"
+            data-aos-duration="1000"
+        >
+            <div
+                class="flex items-center space-x-2"
+                data-aos="fade-right"
+                data-aos-duration="800"
+            >
+                <h1 class="text-2xl font-bold">Bakedo</h1>
+                <span
+                    class="text-sm"
+                    data-aos="zoom-in"
+                    data-aos-duration="1000"
+                >
+                    🍰
+                </span>
+            </div>
+            <ul
+                class="flex items-center space-x-6 text-gray-700"
+                data-aos="fade-up"
+                data-aos-duration="1200"
+            >
+                <li><a href="#" class="hover:text-gray-900">HOME</a></li>
+                <li class="relative">
+                    <a href="#" class="hover:text-gray-900">SHOP</a>
+                    <span
+                        class="absolute -top-2 -right-5 bg-green-500 text-white text-xs px-1 py-0.5 rounded"
+                        data-aos="flip-left"
+                        data-aos-duration="1400"
+                        >NEW</span
+                    >
+                </li>
+                <li><a href="#" class="hover:text-gray-900">FEATURED</a></li>
+                <li><a href="#" class="hover:text-gray-900">PAGES</a></li>
+                <li><a href="#" class="hover:text-gray-900">BLOGS</a></li>
+            </ul>
+            <div
+                class="flex items-center space-x-4"
+                data-aos="zoom-in"
+                data-aos-duration="1500"
+            >
+                <a
+                    href="#"
+                    class="text-gray-700 hover:text-gray-900"
+                    title="hello"
+                    ><i class="fas fa-search"></i
+                ></a>
+                <!-- Trigger Button -->
+
+                <a
+                    href="#"
+                    data-hs-overlay="#hs-vertically-centered-modal"
+                    class="text-gray-700"
+                    title="hello"
+                >
+                    <i class="fas fa-user"></i>
+                </a>
+
+                <a
+                    href="#"
+                    class="text-gray-700 hover:text-gray-900"
+                    title="hello"
+                    ><i class="fas fa-heart"></i
+                ></a>
+                <a
+                    href="#"
+                    class="text-gray-700 hover:text-gray-900"
+                    title="hello"
+                    ><i class="fas fa-shopping-bag"></i
+                ></a>
+            </div>
+        </nav>
+
+        <!-- Slider Section -->
+        <section class="relative" data-aos="fade-in" data-aos-duration="2000">
+            <div class="owl-carousel owl-theme">
+                <!-- Slide 1 -->
+                <div class="relative">
+                    <img
+                        src="./img/bg-1.jpg"
+                        alt="Bakery 1"
+                        class="w-full h-[100vh] object-cover"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    />
+                    <div
+                        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50"
+                    >
+                        <div
+                            class="bg-[#00000080] p-12 rounded"
+                            data-aos="fade-down"
+                            data-aos-duration="1200"
+                        >
+                            <h2
+                                class="text-lg uppercase mb-2"
+                                data-aos="fade-down"
+                                data-aos-duration="1200"
+                            >
+                                Special Offer
+                            </h2>
+                            <h1
+                                class="text-5xl font-bold mb-4"
+                                data-aos="zoom-in"
+                                data-aos-duration="1600"
+                            >
+                                Delicious Bakery
+                            </h1>
+                            <p
+                                class="mb-4"
+                                data-aos="fade-up"
+                                data-aos-duration="2000"
+                            >
+                                Discount Cake &amp; Bakery up to 80% off
+                            </p>
+                            <a
+                                href="#"
+                                class="bg-white text-black px-6 py-2 text-lg font-medium rounded"
+                                data-aos="flip-right"
+                                data-aos-duration="2200"
+                                >Shop Now</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="relative">
+                    <img
+                        src="./img/bg-2.jpg"
+                        alt="Bakery 2"
+                        class="w-full h-[100vh] object-cover"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    />
+                    <div
+                        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50"
+                    >
+                        <div
+                            class="bg-[#00000080] p-12 rounded"
+                            data-aos="fade-down"
+                            data-aos-duration="1200"
+                        >
+                            <h2
+                                class="text-lg uppercase mb-2"
+                                data-aos="slide-right"
+                                data-aos-duration="1000"
+                            >
+                                Freshly Baked
+                            </h2>
+                            <h1
+                                class="text-5xl font-bold mb-4"
+                                data-aos="fade-up"
+                                data-aos-duration="1400"
+                            >
+                                Quality Cakes
+                            </h1>
+                            <p
+                                class="mb-4"
+                                data-aos="zoom-in"
+                                data-aos-duration="1800"
+                            >
+                                Made with love and care
+                            </p>
+                            <a
+                                href="#"
+                                class="bg-white text-black px-6 py-2 text-lg font-medium rounded"
+                                data-aos="flip-up"
+                                data-aos-duration="2200"
+                                >Explore Now</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="relative">
+                    <img
+                        src="./img/bg-3.jpg"
+                        alt="Bakery 3"
+                        class="w-full h-[100vh] object-cover"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    />
+                    <div
+                        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50"
+                    >
+                        <div
+                            class="bg-[#00000080] p-12 rounded"
+                            data-aos="fade-down"
+                            data-aos-duration="1200"
+                        >
+                            <h2
+                                class="text-lg uppercase mb-2"
+                                data-aos="fade-left"
+                                data-aos-duration="1000"
+                            >
+                                Taste the Magic
+                            </h2>
+                            <h1
+                                class="text-5xl font-bold mb-4"
+                                data-aos="zoom-in"
+                                data-aos-duration="1400"
+                            >
+                                Exclusive Recipes
+                            </h1>
+                            <p
+                                class="mb-4"
+                                data-aos="fade-up"
+                                data-aos-duration="1800"
+                            >
+                                Freshly baked every day
+                            </p>
+                            <a
+                                href="#"
+                                class="bg-white text-black px-6 py-2 text-lg font-medium rounded"
+                                data-aos="flip-left"
+                                data-aos-duration="2200"
+                                >Order Now</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="relative">
+                    <img
+                        src="./img/bg-4.jpg"
+                        alt="Bakery 4"
+                        class="w-full h-[100vh] object-cover"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    />
+                    <div
+                        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50"
+                    >
+                        <div
+                            class="bg-[#00000080] p-12 rounded"
+                            data-aos="fade-down"
+                            data-aos-duration="1200"
+                        >
+                            <h2
+                                class="text-lg uppercase mb-2"
+                                data-aos="slide-left"
+                                data-aos-duration="1000"
+                            >
+                                Sweet Moments
+                            </h2>
+                            <h1
+                                class="text-5xl font-bold mb-4"
+                                data-aos="fade-up"
+                                data-aos-duration="1400"
+                            >
+                                Cakes &amp; Pastries
+                            </h1>
+                            <p
+                                class="mb-4"
+                                data-aos="zoom-in"
+                                data-aos-duration="1800"
+                            >
+                                Perfect for every occasion
+                            </p>
+                            <a
+                                href="#"
+                                class="bg-white text-black px-6 py-2 text-lg font-medium rounded"
+                                data-aos="flip-up"
+                                data-aos-duration="2200"
+                                >View Collection</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="relative">
+                    <img
+                        src="./img/bg-5.jpg"
+                        alt="Bakery 5"
+                        class="w-full h-[100vh] object-cover"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    />
+                    <div
+                        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50"
+                    >
+                        <div
+                            class="bg-[#00000080] p-12 rounded"
+                            data-aos="fade-down"
+                            data-aos-duration="1200"
+                        >
+                            <h2
+                                class="text-lg uppercase mb-2"
+                                data-aos="slide-right"
+                                data-aos-duration="1000"
+                            >
+                                Sweet Memories
+                            </h2>
+                            <h1
+                                class="text-5xl font-bold mb-4"
+                                data-aos="zoom-in"
+                                data-aos-duration="1400"
+                            >
+                                Perfect Treats
+                            </h1>
+                            <p
+                                class="mb-4"
+                                data-aos="fade-up"
+                                data-aos-duration="1800"
+                            >
+                                Discover our new collection
+                            </p>
+                            <a
+                                href="#"
+                                class="bg-white text-black px-6 py-2 text-lg font-medium rounded"
+                                data-aos="flip-down"
+                                data-aos-duration="2200"
+                                >Buy Now</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories Section -->
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-center mb-8">
+                Featured Categories
+            </h2>
+
+            <!-- Grid Layout for Categories -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Category 1: Pastry -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Pastry</h3>
+                        <p class="text-gray-600">(10 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Pastry"
+                            alt="Pastry"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Category 2: Breakfast -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Breakfast</h3>
+                        <p class="text-gray-600">(12 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Breakfast"
+                            alt="Breakfast"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Category 3: Coffee Cake -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Coffee Cake</h3>
+                        <p class="text-gray-600">(30 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Coffee+Cake"
+                            alt="Coffee Cake"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Category 4: Bake Tost -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Bake Tost</h3>
+                        <p class="text-gray-600">(25 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Bake+Tost"
+                            alt="Bake Tost"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Category 5: Coconut -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Coconut</h3>
+                        <p class="text-gray-600">(18 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Coconut"
+                            alt="Coconut"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Category 6: Cupcake -->
+                <div
+                    class="bg-white rounded-lg shadow-lg overflow-hidden flex items-center"
+                >
+                    <!-- Text Section -->
+                    <div class="flex-1 p-4">
+                        <h3 class="text-xl font-semibold">Cupcake</h3>
+                        <p class="text-gray-600">(20 Items)</p>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-48 h-48 bg-gray-200">
+                        <img
+                            src="https://via.placeholder.com/200x200?text=Cupcake"
+                            alt="Cupcake"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+            id="hs-vertically-centered-modal"
+            class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center"
+            aria-hidden="true"
+        >
+            <div class="bg-white w-11/12 max-w-md rounded-lg shadow-lg p-6">
+                <!-- Modal Header -->
+                <div class="flex justify-end">
+                    <button
+                        class="text-gray-600 hover:text-gray-900"
+                        data-hs-overlay="#hs-vertically-centered-modal"
+                    >
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <!-- Login Form -->
+                <div id="loginForm" class="text-center">
+                    <h5 class="text-xl font-bold mb-4">
+                        Great to have you back!
+                    </h5>
+                    <input
+                        type="email"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Email address"
+                        required
+                    />
+                    <input
+                        type="password"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Password"
+                        required
+                    />
+                    <a
+                        href="#"
+                        class="block mb-3 text-sm text-gray-500 hover:text-gray-700"
+                        >Forgot your password?</a
+                    >
+                    <button
+                        class="w-full py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900"
+                    >
+                        LOG IN
+                    </button>
+                    <div class="mt-4">
+                        <span>Don’t have an account? </span>
+                        <span
+                            class="text-blue-600 cursor-pointer hover:none"
+                            onclick="showSignup()"
+                            >Register now</span
+                        >
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="hidden text-center">
+                    <h5 class="text-xl font-bold mb-4">Register</h5>
+                    <input
+                        type="text"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Full Name"
+                        required
+                    />
+                    <input
+                        type="email"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Email address"
+                        required
+                    />
+                    <input
+                        type="tel"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Phone Number"
+                        required
+                    />
+                    <input
+                        type="password"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Password"
+                        required
+                    />
+                    <input
+                        type="password"
+                        class="form-input w-full p-2 mb-3 border border-gray-300 rounded-lg"
+                        placeholder="Confirm Password"
+                        required
+                    />
+                    <button
+                        class="w-full py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900"
+                    >
+                        REGISTER
+                    </button>
+                    <div class="mt-4">
+                        <span>Already have an account? </span>
+                        <span
+                            class="text-blue-600 cursor-pointer hover:none"
+                            onclick="showLogin()"
+                            >Back to login</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script>
+            // Owl Carousel Initialization
+            $(document).ready(function () {
+                $(".owl-carousel").owlCarousel({
+                    items: 1,
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    dots: false,
+                    nav: false,
+                    animateOut: "animate__zoomInLeft",
+                    animateIn: "animate__zoomOutRight"
+                });
+            });
+
+            // AOS Initialization
+            AOS.init({});
+        </script>
+        <!-- <script>
+            // Show location permission popup on page load
+            document.addEventListener("DOMContentLoaded", function () {
+                // Check if geolocation is supported
+                if ("geolocation" in navigator) {
+                    // Request for location permission
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            console.log("Location access granted.");
+                            console.log("Latitude: ", position.coords.latitude);
+                            console.log(
+                                "Longitude: ",
+                                position.coords.longitude
+                            );
+                        },
+                        (error) => {
+                            console.error("Location access denied.");
+                            alert(
+                                "Please allow location access for a better experience."
+                            );
+                        }
+                    );
+                } else {
+                    alert("Geolocation is not supported by your browser.");
+                }
+            });
+        </script> -->
+        <!-- JavaScript -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get modal and trigger elements
+                const modal = document.getElementById(
+                    "hs-vertically-centered-modal"
+                );
+                const trigger = document.querySelector(
+                    "[data-hs-overlay='#hs-vertically-centered-modal']"
+                );
+                const closeButtons = modal.querySelectorAll(
+                    "[data-hs-overlay='#hs-vertically-centered-modal']"
+                );
+
+                // Open modal
+                trigger.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    modal.classList.remove("hidden");
+                    modal.classList.add("flex");
+                    modal.setAttribute("aria-hidden", "false");
+                });
+
+                // Close modal
+                closeButtons.forEach((btn) => {
+                    btn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        modal.classList.add("hidden");
+                        modal.classList.remove("flex");
+                        modal.setAttribute("aria-hidden", "true");
+                    });
+                });
+
+                // Close modal on outside click
+                modal.addEventListener("click", function (e) {
+                    if (e.target === modal) {
+                        modal.classList.add("hidden");
+                        modal.classList.remove("flex");
+                        modal.setAttribute("aria-hidden", "true");
+                    }
+                });
+            });
+
+            // Show signup form
+            function showSignup() {
+                document.getElementById("loginForm").classList.add("hidden");
+                document
+                    .getElementById("signupForm")
+                    .classList.remove("hidden");
+            }
+
+            // Show login form
+            function showLogin() {
+                document.getElementById("signupForm").classList.add("hidden");
+                document.getElementById("loginForm").classList.remove("hidden");
+            }
+
+            // Show the popup when the page loads
+            window.onload = function () {
+                const modal = document.getElementById("discountModal");
+                modal.classList.remove("hidden");
+            };
+
+            // Close the modal
+            document
+                .getElementById("closeModal")
+                .addEventListener("click", function () {
+                    const modal = document.getElementById("discountModal");
+                    modal.classList.add("hidden");
+                });
+
+            // Close the modal when "No, Thanks." is clicked
+            document
+                .getElementById("noThanks")
+                .addEventListener("click", function () {
+                    const modal = document.getElementById("discountModal");
+                    modal.classList.add("hidden");
+                });
+
+            // Email form validation
+            document
+                .getElementById("emailForm")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const emailInput = document.getElementById("emailInput");
+                    if (
+                        emailInput.value === "" ||
+                        !emailInput.value.includes("@")
+                    ) {
+                        alert("Please enter a valid email address!");
+                    } else {
+                        alert("Thank you for subscribing!");
+                        document
+                            .getElementById("discountModal")
+                            .classList.add("hidden");
+                    }
+                });
+        </script>
+    </body>
+</html>
